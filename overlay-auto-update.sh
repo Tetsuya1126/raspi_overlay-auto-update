@@ -70,7 +70,7 @@ error_blink() {
   echo none > "$LED_ERR/trigger"
 
   while true; do
-    for i in $(seq 1 $CODE); do
+    for ((i=1;i<=CODE;i++)); do
       echo 1 > "$LED_ERR/brightness"
       sleep 0.2
       echo 0 > "$LED_ERR/brightness"
