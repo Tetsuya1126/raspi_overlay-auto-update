@@ -167,8 +167,6 @@ switch_overlay() {
 }
 
 cooldown() {
-#  ELAPSED=$(( $(date +%s) - DONE_AT ))
-#  if [ "$ELAPSED" -ge "$COOLDOWN" ]; then
   if is_in_cooldown; then
     echo "[FLOW] Cooldown active -> skip update"
     exit 0

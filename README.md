@@ -35,8 +35,8 @@ sudo bash install.sh
 
 sudo overlay-auto-update.sh --dry-run
 
-
 実際のシステム変更・overlay切替・reboot は行われません。
+そのため、overlayの状態により実際の動作が異なります。
 
 ---
 
