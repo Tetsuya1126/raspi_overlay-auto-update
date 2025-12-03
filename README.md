@@ -22,7 +22,7 @@ OverlayFS 環境に対応した **安全な自動 apt 更新スクリプト**。
 ---
 
 ## Install
-git clone https://github.com/Tetsuya1126/overlay-auto-update.git
+git clone https://github.com/Tetsuya1126/raspi_overlay-auto-update.git
 
 cd overlay-auto-update
 
