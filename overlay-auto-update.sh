@@ -7,6 +7,9 @@ LOG="/var/log/overlay_auto_update.log"
 OVERLAY_CMD="/usr/bin/raspi-config nonint do_overlayfs"
 COOLDOWN=86400    # 24時間
 DRY_RUN=false
+OVERLAY_ON=false  # check前はFalse
+STAGE=0
+DONE_AT=
 
 # 新Pi対応LED
 LED="/sys/class/leds/PWR"
@@ -134,8 +137,11 @@ is_overlay() {
 }
 
 get_overlay_status() {
-  OVERLAY_ON=false
-  is_overlay && OVERLAY_ON=true
+  if is_overlay; then
+    OVERLAY_ON=true
+  else
+    OVERLAY_ON=false
+  fi
 }
 
 get_last_stage() {
