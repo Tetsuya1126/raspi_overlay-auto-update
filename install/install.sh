@@ -83,7 +83,8 @@ if [[ -f "$AUTO_MAINTENANCE_TASKS_FILE" ]]; then
   read -rp "Overwrite? [yes/No]: " ans
   if [[ "$ans" == "yes" ]]; then
     echo  "[INFO] Overwriting existing config with default config"
-  else  
+  else
+    echo "[INFO] Backing up existing config to ${AUTO_MAINTENANCE_TASKS_FILE}.backup"  
     cp -a \
     "$AUTO_MAINTENANCE_TASKS_FILE" \
     "$AUTO_MAINTENANCE_TASKS_FILE.backup"
@@ -93,17 +94,14 @@ fi
 echo "[INFO] Installing default maintenance tasks configuration"
 
 install -Dm644 \
-  "$AUTO_MAINTENANCE_LIB/constants/maintenance_tasks.yaml" \
+  "$AUTO_MAINTENANCE_LIB/maintenance_funcs/maintenance_tasks.yaml" \
   "$AUTO_MAINTENANCE_TASKS_FILE"
-
 
 
 # =================================================
 # Install auto-maintenance services
 # =================================================
 echo "[INFO] Installing overlay maintenance service"
-
-systemctl stop auto-maintenance.timer
 
 install -Dm644 \
   "$AUTO_MAINTENANCE_LIB/install/service/auto-maintenance.service" \
