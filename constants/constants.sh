@@ -13,17 +13,18 @@ auto_maintenance_component_root_dir="$(cd "$SCRIPT_DIR/.." && pwd)"
 
 load_modules(){
   local target_path="$1"
-  local target_modules="$2"
-    
+  shift
+  local target_modules=("$@")
+
   for load_file in "${target_modules[@]}"; do
     # shellcheck disable=SC2154
-    local target_file="$target_path/$load_file"
+    local target_file="${target_path}/${load_file}.sh"
     if [[ -f "$target_file" ]]; then
       # shellcheck disable=SC1090
       source "$target_file"
     else
       echo "[ERROR] $target_file が見つかりません。" >&2
-    exit 1
+      exit 1
     fi
   done
 }
@@ -34,13 +35,13 @@ load_modules(){
 libs_path="$auto_maintenance_component_root_dir"/libs
 target_libs=(
     "error"
-    "lock"
     "log"
     "dry"
     "detect_platform"
     "detect_overlay"
     "overlay_mode_change"
     "yq_helpr"
+    "lock"
 )
 load_modules "$libs_path" "${target_libs[@]}"
 
@@ -52,7 +53,6 @@ target_modules=(
     "state_manager"
     "actions"
     "util_func"
-    "task_runner"
 )
 load_modules "$modules_path" "${target_modules[@]}"
 
@@ -98,8 +98,16 @@ export STATE_IN_PROGRESS=1
 export STATE_DONE=2
 
 # Overlay maintenance task runner
-export TASKS_YAML="$AUTO_MAINTENANCE_TASKS_FILE"
-export TASK_RUNNER="${AUTO_MAINTENANCE_LIB}/modules/task_runner.sh"
+if [[ -f "${AUTO_MAINTENANCE_LIB}/modules/task_runner.sh" ]]; then
+  export TASK_RUNNER="${AUTO_MAINTENANCE_LIB}/modules/task_runner.sh"
+else
+  export TASK_RUNNER="${auto_maintenance_component_root_dir}/modules/task_runner.sh"
+fi
+if [[ -f "$AUTO_MAINTENANCE_TASKS_FILE" ]]; then
+  export TASKS_YAML="$AUTO_MAINTENANCE_TASKS_FILE"
+else
+  export TASKS_YAML="${auto_maintenance_component_root_dir}/maintenance_funcs/maintenance_tasks.yaml"
+fi
 
 
 # =================================================

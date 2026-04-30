@@ -5,7 +5,7 @@ set -e
 # =================================================
 SCRIPT_PATH="$(readlink -f "${BASH_SOURCE[0]}")"
 SCRIPT_DIR="$(cd -- "$(dirname -- "$SCRIPT_PATH")" && pwd)"
-auto_maintenance_component_root_dir="$(cd "$SCRIPT_DIR/../.." && pwd)"
+auto_maintenance_component_root_dir="$(cd "$SCRIPT_DIR/../" && pwd)"
 
 # ========================================
 # Load Component Constants

@@ -1,11 +1,11 @@
 #!/bin/bash
 
 # overlayroot を ON/OFF 切替するスクリプト
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-BASHLIB_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
+#SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+#BASHLIB_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
 
 # shellcheck disable=SC1091
-source "$BASHLIB_DIR/constants/constants.sh"
+#source "$BASHLIB_DIR/constants/constants.sh"
 
 overlay_on() {
   echo "[INFO] Turning overlay ON"

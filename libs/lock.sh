@@ -8,6 +8,21 @@
 #   core/error.sh
 #   hardware/detect_overlay.sh
 
+# =================================================
+# Lock paths (overlay-safe)
+# =================================================
+if is_overlay_enabled; then
+    # overlayroot 環境（永続 RW 領域）
+    BASHLIB_LOCK_PERSIST_DIR="/media/root-rw/locks"
+else
+    # 通常環境
+    BASHLIB_LOCK_PERSIST_DIR="/var/lib/bashlib/locks"
+fi
+
+BASHLIB_LOCK_RUNTIME_DIR="/run/bashlib/locks"
+
+mkdir -p "$BASHLIB_LOCK_PERSIST_DIR" "$BASHLIB_LOCK_RUNTIME_DIR"
+
 # ---------------------------------------
 # internal: held lock fds
 # ---------------------------------------
