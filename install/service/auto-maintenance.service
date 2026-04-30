@@ -1,0 +1,18 @@
+[Unit]
+Description=Auto Maintenance w/ overlay toggle
+After=network.target
+
+# Panic mode gate
+ConditionPathExists=!/boot/firmware/panic.lock
+
+# 60分で5回までRetry
+StartLimitBurst=5
+StartLimitIntervalSec=3600
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/auto-maintenance/maintenance.sh
+RemainAfterExit=no
+Restart=on-failure
+# 5分待ってリスタート
+RestartSec=300

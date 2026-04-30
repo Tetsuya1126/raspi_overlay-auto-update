@@ -1,0 +1,3 @@
+tasks:
+  - name: apt_update
+    cmd: /usr/local/lib/auto-maintenance/maintenance_funcs/apt_update.sh

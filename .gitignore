@@ -1,0 +1,4 @@
+#launch.json folder
+.vscode/
+*.log
+.env

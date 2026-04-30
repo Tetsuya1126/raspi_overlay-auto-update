@@ -1,0 +1,14 @@
+[Unit]
+Description=Daily overlay maintenance executor
+
+[Timer]
+Unit=auto-maintenance.service
+
+#for main relaese
+OnCalendar=Sun,Thu *-*-* 04:00:00
+
+RandomizedDelaySec=0
+Persistent=true
+
+[Install]
+WantedBy=timers.target
