@@ -79,10 +79,15 @@ done
 
 # Copy default maintenance tasks configuration if it doesn't exist
 if [[ -f "$AUTO_MAINTENANCE_TASKS_FILE" ]]; then
-  echo "[INFO] Existing config found, backing up"
-  cp -a \
+  echo "[INFO] Existing config found"
+  read -rp "Overwrite? [yes/No]: " ans
+  if [[ "$ans" == "yes" ]]; then
+    echo  "[INFO] Overwriting existing config with default config"
+  else  
+    cp -a \
     "$AUTO_MAINTENANCE_TASKS_FILE" \
     "$AUTO_MAINTENANCE_TASKS_FILE.backup"
+  fi
 fi
 
 echo "[INFO] Installing default maintenance tasks configuration"
@@ -97,6 +102,8 @@ install -Dm644 \
 # Install auto-maintenance services
 # =================================================
 echo "[INFO] Installing overlay maintenance service"
+
+systemctl stop auto-maintenance.timer
 
 install -Dm644 \
   "$AUTO_MAINTENANCE_LIB/install/service/auto-maintenance.service" \
