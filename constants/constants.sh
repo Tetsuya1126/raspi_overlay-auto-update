@@ -114,12 +114,11 @@ fi
 # Branch
 # =================================================
 #BRANCH="main"
-#BRANCH="release-test/2.0.0"
-BRANCH="REV2.0.0-TEST"
+#BRANCH="v2.0.0-rc"
+BRANCH="v2.0.0-beta1"
 
 TEST_BRANCH=(
-    release-test/2.0.0
-    REV2.0.0-TEST
+    v2.0.0-beta1
 )
 
 is_test_branch() {

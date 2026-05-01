@@ -2,6 +2,18 @@
 
 maintenance.sh は Raspberry Pi OverlayFS を対象にした**安全な自動メンテナンス**を提供するスクリプトです。
 
+## Beta Release
+
+This branch contains version 2 beta.
+
+Status:
+- Test release
+- Behavior/output may still change
+- Recommended for testers only
+
+For stable production use:
+- use `main`
+
 ## ⌨インストール方法
 
 ```bash
