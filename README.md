@@ -1,3 +1,5 @@
+[![Shell CI](https://github.com/Tetsuya1126/raspi_overlay-auto-update/actions/workflows/shellcheck.yml/badge.svg)](https://github.com/Tetsuya1126/raspi_overlay-auto-update/actions/workflows/shellcheck.yml)
+
 # 🧰 Auto Maintenance System (overlay-aware)
 
 maintenance.sh は Raspberry Pi OverlayFS を対象にした**安全な自動メンテナンス**を提供するスクリプトです。
@@ -334,6 +336,10 @@ sudo systemctrl list-jobs
 overlay_mode_change のリトライ処理
 
 FAILED 状態からの自動リカバリ
+
+## 🚦CI
+GitHub Actions で shellcheck + bash -n による自動検証を行っています。
+
 
 ## 📄License
 
