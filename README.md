@@ -14,6 +14,21 @@ OverlayFS 環境に対応した **安全な自動 apt 更新スクリプト**。
 
 ---
 
+## Preview Release Available
+
+The next-generation version is now available for testing.
+
+Branch:
+`v2.0.0-beta1`
+
+Status:
+- Beta test release
+- Stable users should remain on `main`
+
+If no critical issues are found, this version may become the next stable release.
+
+---
+
 ## Features
 - OverlayFS 書き込み保護を維持したまま OS 更新
 - 2 Stage update & reboot flow
