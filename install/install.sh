@@ -94,7 +94,7 @@ fi
 echo "[INFO] Installing default maintenance tasks configuration"
 
 install -Dm644 \
-  "$AUTO_MAINTENANCE_LIB/maintenance_funcs/maintenance_tasks.yaml" \
+  "$AUTO_MAINTENANCE_LIB/configs/maintenance_tasks.yaml" \
   "$AUTO_MAINTENANCE_TASKS_FILE"
 
 
