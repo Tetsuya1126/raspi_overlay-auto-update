@@ -19,7 +19,7 @@ For stable production use:
 ## ⌨インストール方法
 
 ```bash
-git clone git@github.com:Tetsuya1126/raspi_overlay-auto-update
+git clone https://github.com/Tetsuya1126/raspi_overlay-auto-update.git
 cd raspi_overlay-auto-update/
 sudo ./install/install.sh
 ```
@@ -51,6 +51,13 @@ COOLDOWN
 ```
 
 の設定を確認をしてください
+
+```
+タスク例の
+maintenance_funcs/apt_update.sh　は　 
+/boot/firmware ro　で　mountされている前提です。
+mountポイントをよく確認してください
+```
 
 ## ⏩State & Actions
 OverlayFS で Overlay OFF時に確実にmaintenance 実行するため、
