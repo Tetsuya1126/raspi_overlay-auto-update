@@ -31,7 +31,7 @@ apt_update() {
 # =================================================
 
 if is_raspberry_pi; then
-  echo "[INFO] rasberry pi mode"
+  echo "[INFO] raspberry pi mode"
   mount -o remount,rw /boot/firmware
   apt_update
   mount -o remount,ro /boot/firmware
