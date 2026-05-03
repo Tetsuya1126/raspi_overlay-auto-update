@@ -1,34 +1,17 @@
 [![Shell CI](https://github.com/Tetsuya1126/raspi_overlay-auto-update/actions/workflows/shellcheck.yml/badge.svg)](https://github.com/Tetsuya1126/raspi_overlay-auto-update/actions/workflows/shellcheck.yml)
 
-# 🚀 OverlayFS Safe Auto Update for Raspberry Pi
+# 🚀 Raspberry Pi OverlayFS Auto Update
 
-Automatic and safe system maintenance for **Raspberry Pi running OverlayFS read-only root filesystem**.
+Automatic unattended updates for Raspberry Pi running OverlayFS read-only mode.
 
-This project provides a reliable way to run `apt update`, `apt upgrade`, cleanup tasks, and custom maintenance jobs by temporarily disabling OverlayFS, rebooting safely, executing maintenance, then restoring OverlayFS automatically.
+Temporarily disables OverlayFS, performs apt upgrades safely,
+then restores read-only mode automatically.
 
 > Raspberry Pi OverlayFS 環境で、安全に自動アップデートを行うためのメンテナンスフレームワークです。
 
 ---
 
-# ✨ Features
-
-- 🔄 Automatic OverlayFS ON/OFF switching
-- 🔁 Safe reboot-based maintenance workflow
-- 🛡 Prevents duplicate runs with lock control
-- 💾 Smart /boot/firmware remount handling for kernel upgrades
-- ⏱ systemd timer automation
-- ❄ Cooldown interval protection
-- 🧪 Dry-run mode for safe testing
-- 📄 JSON task result logs
-- ⚠ Continue processing even if one task fails
-- 🔧 Custom task definitions via YAML
-- ✅ Real-world tested for months
-
-> OverlayFS環境で通常の `apt upgrade` が永続保存されない問題を解決します。
-
----
-
-# 📌 Why This Project?
+## 📌 Why This Project?
 
 When Raspberry Pi uses OverlayFS (read-only mode):
 
@@ -41,10 +24,33 @@ This project automates the entire workflow safely.
 > OverlayFS利用時の面倒な手動更新作業を自動化します。
 
 ---
+## ✨ Features
 
-# ⚡ Quick Install
+### Core
+- 🔄 Automatic OverlayFS ON/OFF switching
+- 🔁 Safe reboot-based maintenance workflow
+- 🔧 Custom task definitions via YAML
 
-## Method 1: Git Clone
+### Reliability
+- 🛡 Prevents duplicate runs with lock control
+- ❄ Cooldown interval protection
+- ⚠ Continue processing even if one task fails
+- 💾 Smart /boot/firmware remount handling for kernel upgrades
+- ⏱ systemd timer automation
+- ✅ Real-world tested for months
+
+### Developer Friendly
+- 🧪 Dry-run mode for safe testing
+- 📄 JSON task result logs
+- 🚦 GitHub Actions CI
+
+> OverlayFS環境で通常の `apt upgrade` が永続保存されない問題を解決します。
+
+---
+
+## ⚡ Quick Install
+
+### Method 1: Git Clone
 
 ```bash
 git clone https://github.com/Tetsuya1126/raspi_overlay-auto-update.git
@@ -52,7 +58,7 @@ cd raspi_overlay-auto-update
 sudo ./install/install.sh
 ```
 
-## Method 2: One-Line Installer
+### Method 2: One-Line Installer
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/Tetsuya1126/raspi_overlay-auto-update/main/install/install.sh | sudo bash
@@ -71,7 +77,7 @@ sudo apt-get install curl -y
 
 ---
 
-# 📁 Installed Files
+## 📁 Installed Files
 
 | Type | Path |
 |------|------|
@@ -85,9 +91,9 @@ sudo apt-get install curl -y
 
 ---
 
-# 🔄 How It Works
+## 🔄 How It Works
 
-## Maintenance Flow
+### Maintenance Flow
 
 ```text
 Timer Start
@@ -113,7 +119,7 @@ Restore OverlayFS ON
 
 ---
 
-# 🎯 Actions
+## 🎯 Actions
 
 | Action | Description |
 |-------|-------------|
@@ -126,7 +132,7 @@ Restore OverlayFS ON
 
 ---
 
-# 🧪 Dry Run Mode
+## 🧪 Dry Run Mode
 
 Test safely without reboot or Overlay changes:
 
@@ -161,13 +167,13 @@ tasks:
   - name: custom_script
     cmd: bash /usr/local/bin/myscript.sh
 ```
-### apt_update.sh ; Smart Raspberry Pi Boot Partition Handling
+**apt_update.sh ; Smart Raspberry Pi Boot Partition Handling**
 
 During kernel / firmware upgrades, this project temporarily remounts `/boot/firmware` as read-write and restores read-only mode automatically.
 
 ---
 
-# ⏱ systemd Timer Example
+## ⏱ systemd Timer Example
 
 ```ini
 [Timer]
@@ -191,9 +197,9 @@ systemctl list-timers
 
 ---
 
-# 🧩 Cooldown Control
+## 🧩 Cooldown Control
 
-Default: `in /usr/local/lib/auto-maintenance/constants/constants.sh`
+Default value is defined in: `/usr/local/lib/auto-maintenance/constants/constants.sh`
 
 ```bash
 COOLDOWN=86400
@@ -205,15 +211,15 @@ This prevents excessive SD card writes and repeated maintenance runs.
 
 ---
 
-# 📄 Logs
+## 📄 Logs
 
-## Main Log
+### Main Log
 
 ```bash
 cat /var/log/maintenance/maintenance.log
 ```
 
-## Task JSON Result
+### Task JSON Result
 
 ```bash
 cat /var/log/maintenance/task_status.json
@@ -227,7 +233,7 @@ Example:
 
 ---
 
-# 🔐 Duplicate Run Protection
+## 🔐 Duplicate Run Protection
 
 If another process is already running:
 
@@ -237,7 +243,7 @@ If another process is already running:
 
 ---
 
-# 🧯 Troubleshooting
+## 🧯 Troubleshooting
 
 | Problem | Cause | Fix |
 |--------|------|-----|
@@ -247,7 +253,7 @@ If another process is already running:
 
 ---
 
-# ✅ Tested Environments
+## ✅ Tested Environments
 
 - Raspberry Pi 2 Model B
 - Raspberry Pi Zero
@@ -262,7 +268,7 @@ If another process is already running:
 
 ---
 
-# 🚦 CI
+## 🚦 CI
 
 GitHub Actions:
 
@@ -271,7 +277,7 @@ GitHub Actions:
 
 ---
 
-# 🛣 Roadmap
+## 🛣 Roadmap
 
 - Retry logic for Overlay switching
 - Auto recovery from FAILED state
@@ -280,26 +286,25 @@ GitHub Actions:
 
 ---
 
-# 🤝 Contributions
+## 🤝 Contributions
 
 Issues / Pull Requests welcome.
 
 ---
 
-# 📄 License
+## ✅ Status
+
+Stable release for general use.
+
+---
+
+## 📄 License
 
 MIT License
 
 ---
 
-# ⭐ If this project helps you
+## ⭐ **If this project helps you, please star this repository.**
 
-Please star this repository.
 
-```bash
-git clone https://github.com/Tetsuya1126/raspi_overlay-auto-update.git
-cd raspi_overlay-auto-update
-sudo ./install/install.sh
-```
-
-Safe Raspberry Pi updates start here.
+**Reliable updates for read-only Raspberry Pi systems.**
