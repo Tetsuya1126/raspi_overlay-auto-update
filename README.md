@@ -28,7 +28,11 @@ Status:
 If no critical issues are found, this version may become the next stable release.
 
 ---
+⚠️ Official releases are published only in this repository.
 
+Any third-party archives or mirrored packages are unverified and unsupported.
+
+---
 ## Features
 - OverlayFS 書き込み保護を維持したまま OS 更新
 - 2 Stage update & reboot flow
