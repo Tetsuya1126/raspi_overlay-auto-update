@@ -19,6 +19,19 @@ When Raspberry Pi uses OverlayFS (read-only mode):
 - automatic updates are difficult
 - maintenance often requires manual reboot steps
 
+
+Many simple update scripts temporarily remount the root filesystem as read-write.
+However, in long-term unattended systems using OverlayFS, writable layers can gradually fill up, causing failures or instability.
+
+This project intentionally uses a reboot-based update flow:
+
+1. Enter writable update mode
+2. Apply updates safely
+3. Reboot automatically
+4. Start with a clean overlay state
+
+This prioritizes long-term reliability over short-term convenience.
+
 This project automates the entire workflow safely.
 
 > OverlayFS利用時の面倒な手動更新作業を自動化します。
@@ -48,6 +61,13 @@ This project automates the entire workflow safely.
 
 ---
 
+## ⚠️ Official releases are published only in this repository.
+
+**Any third-party archives or mirrored packages are unverified and unsupported.**
+**We do not distribute ZIP archives, EXE files, or third-party mirrors.**
+
+---
+
 ## ⚡ Quick Install
 
 ### Method 1: Git Clone
@@ -61,7 +81,7 @@ sudo ./install/install.sh
 ### Method 2: One-Line Installer
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/Tetsuya1126/raspi_overlay-auto-update/main/install/install.sh | sudo bash
+curl -fsSL https://raw.githubusercontent.com/Tetsuya1126/raspi_overlay-auto-update/v2.0.0-beta1/install/install.sh | sudo bash
 ```
 
 > Downloads and runs the official installer directly from GitHub.
@@ -149,7 +169,7 @@ Dry-run behavior:
 
 ---
 
-# 🛠 Task Configuration
+## 🛠 Task Configuration
 
 Edit:
 
@@ -294,7 +314,7 @@ Issues / Pull Requests welcome.
 
 ## ✅ Status
 
-Stable release for general use.
+beta1 release for establish Stable release for general use.
 
 ---
 
@@ -304,7 +324,9 @@ MIT License
 
 ---
 
-## ⭐ **If this project helps you, please star this repository.**
+## 🏛️ Official Repository
 
-
+**This is the original actively maintained repository with tested installation steps.**
+### **If this project helps you, please star this repository.**
 **Reliable updates for read-only Raspberry Pi systems.**
+
