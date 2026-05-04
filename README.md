@@ -28,7 +28,7 @@ Status:
 If no critical issues are found, this version may become the next stable release.
 
 ---
-⚠️ Official releases are published only in this repository.
+## ⚠️ Official releases are published only in this repository.
 
 Any third-party archives or mirrored packages are unverified and unsupported.
 
