@@ -15,6 +15,27 @@ state_load() {
     STATE=$STATE_NONE
     DONE_AT=0
   fi
+  state_sanitize
+}
+
+# ---- Sanitaize state ----
+state_sanitize() {
+  # STATEの値が不正な場合はSTATE_NONEにリセット
+  case "$STATE" in
+    "$STATE_NONE"|"$STATE_IN_PROGRESS"|"$STATE_DONE")
+      ;;
+    *)
+      echo "Invalid state value: $STATE. Resetting to STATE_NONE."
+      STATE=$STATE_NONE
+      DONE_AT=0
+      ;;
+  esac
+
+  # DONE_ATが数値でない場合は0にリセット
+  if ! [[ "$DONE_AT" =~ ^[0-9]+$ ]]; then
+    echo "Invalid DONE_AT value: $DONE_AT. Resetting to 0."
+    DONE_AT=0
+  fi
 }
 
 # ---- Save state ----
@@ -80,6 +101,9 @@ state_decide_action() {
       "$STATE_NONE")
         echo "NEED_OVERLAY_OFF"
         ;;
+      *)
+        echo "NEED_OVERLAY_OFF"
+        ;;
     esac
 
   else
@@ -95,6 +119,9 @@ state_decide_action() {
         echo "MAINTENANCE_CONTINUE"
         ;;
       "$STATE_NONE")
+        echo "IDLE"
+        ;;
+      *)
         echo "IDLE"
         ;;
     esac

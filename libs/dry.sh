@@ -28,14 +28,6 @@ dry_eval() {
   eval "$*"
 }
 
-_dry_eval() {
-  if [[ "${DRY:-false}" == true ]]; then
-    log_info "[DRY] $(printf '%q ' "$@")"
-    return 0
-  fi
-
-  "$@"
-}
 
 dry_run_mode() {
   # ==== DRY MODE 判定 ====

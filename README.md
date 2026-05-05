@@ -1,119 +1,107 @@
-[![Shell CI](https://github.com/Tetsuya1126/raspi_overlay-auto-update/actions/workflows/shellcheck.yml/badge.svg)](https://github.com/Tetsuya1126/raspi_overlay-auto-update/actions/workflows/shellcheck.yml)
-
 # 🚀 Raspberry Pi OverlayFS Auto Update
 
-Automatic unattended updates for Raspberry Pi running OverlayFS read-only mode.
+**Fix the problem: *“apt upgrade disappears after reboot”* on OverlayFS systems.**
 
-Temporarily disables OverlayFS, performs apt upgrades safely,
-then restores read-only mode automatically.
+Fully automated, reboot-safe maintenance framework for **read-only Raspberry Pi environments**.
 
-> Raspberry Pi OverlayFS 環境で、安全に自動アップデートを行うためのメンテナンスフレームワークです。
+> Designed for long-term unattended systems — stable, safe, and hands-free.
 
 ---
 
-## 📌 Why This Project?
+⭐ **If this project helps you, consider giving it a star!**
 
-When Raspberry Pi uses OverlayFS (read-only mode):
+---
 
-- `apt upgrade` changes are lost after reboot
-- automatic updates are difficult
-- maintenance often requires manual reboot steps
+## 🎯 Who is this for?
 
+* Raspberry Pi running in **read-only (OverlayFS) mode**
+* Devices deployed in the field (IoT / edge / remote systems)
+* Systems that must run **unattended for months**
+* Anyone tired of **manual update + reboot workflows**
 
-Many simple update scripts temporarily remount the root filesystem as read-write.
-However, in long-term unattended systems using OverlayFS, writable layers can gradually fill up, causing failures or instability.
+---
 
-This project intentionally uses a reboot-based update flow:
+## 💥 What problem does this solve?
 
-1. Enter writable update mode
+On OverlayFS systems:
+
+* `apt upgrade` changes **disappear after reboot**
+* Writable layer can **fill up over time**
+* Manual maintenance becomes **fragile and risky**
+
+---
+
+## ✅ The Solution
+
+This project introduces a **reboot-based maintenance workflow**:
+
+1. Switch to writable mode
 2. Apply updates safely
 3. Reboot automatically
-4. Start with a clean overlay state
+4. Restore clean read-only OverlayFS
 
-This prioritizes long-term reliability over short-term convenience.
-
-This project automates the entire workflow safely.
-
-> OverlayFS利用時の面倒な手動更新作業を自動化します。
-
----
-## ✨ Features
-
-### Core
-- 🔄 Automatic OverlayFS ON/OFF switching
-- 🔁 Safe reboot-based maintenance workflow
-- 🔧 Custom task definitions via YAML
-
-### Reliability
-- 🛡 Prevents duplicate runs with lock control
-- ❄ Cooldown interval protection
-- ⚠ Continue processing even if one task fails
-- 💾 Smart /boot/firmware remount handling for kernel upgrades
-- ⏱ systemd timer automation
-- ✅ Real-world tested for months
-
-### Developer Friendly
-- 🧪 Dry-run mode for safe testing
-- 📄 JSON task result logs
-- 🚦 GitHub Actions CI
-
-> OverlayFS環境で通常の `apt upgrade` が永続保存されない問題を解決します。
+✔ No manual steps
+✔ No broken updates
+✔ No overlay corruption
 
 ---
 
-## ⚠️ Official releases are published only in this repository.
+## ✨ Key Features
 
-**Any third-party archives or mirrored packages are unverified and unsupported.**
-**We do not distribute ZIP archives, EXE files, or third-party mirrors.**
+### 🔄 Fully Automated
+
+* Automatic OverlayFS ON/OFF switching
+* systemd timer-based execution
+* Zero manual intervention
+
+### 🛡 Built for Reliability
+
+* Reboot-based safe update design
+* Lock mechanism (prevents duplicate runs)
+* Cooldown protection (avoids excessive writes)
+* Resume support after interruption
+* Self-healing state recovery (fallback to safe state)
+
+### 🔧 Flexible & Extensible
+
+* YAML-based task definitions
+* Custom scripts supported
+* JSON logging for automation
+
+### 🧪 Developer Friendly
+
+* Dry-run mode (no reboot / safe testing)
+* GitHub Actions CI (shellcheck + syntax validation)
 
 ---
 
-## ⚡ Quick Install
+## ⚡ Quick Start (under 3 minutes)
 
-### Method 1: Git Clone
+Install and enable automatic maintenance in one step:
 
-```bash
-git clone https://github.com/Tetsuya1126/raspi_overlay-auto-update.git
-cd raspi_overlay-auto-update
-sudo ./install/install.sh
-```
-
-### Method 2: One-Line Installer
+### One-line install
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/Tetsuya1126/raspi_overlay-auto-update/v2.0.0-beta1/install/install.sh | sudo bash
 ```
 
-> Downloads and runs the official installer directly from GitHub.
+---
 
-### If `curl` is not installed:
+### Or manual install
 
 ```bash
-sudo apt-get update
-sudo apt-get install curl -y
+git clone --branch v2.0.0-beta1 --depth 1 https://github.com/Tetsuya1126/raspi_overlay-auto-update.git
+cd raspi_overlay-auto-update
+sudo ./install/install.sh
 ```
 
-> 約3分で導入可能です。
+---
+
+> ⚠️ Always install from the official GitHub repository to ensure safety.
 
 ---
 
-## 📁 Installed Files
-
-| Type | Path |
-|------|------|
-| Main library | `/usr/local/lib/auto-maintenance/` |
-| Executable link | `/usr/local/bin/auto-maintenance/maintenance.sh` |
-| Service | `/etc/systemd/system/auto-maintenance.service` |
-| Timer | `/etc/systemd/system/auto-maintenance.timer` |
-| Config | `/etc/maintenance_tasks.yaml` |
-| State file | `/var/lib/maintenance/state` |
-| Logs | `/var/log/maintenance/` |
-
----
-
-## 🔄 How It Works
-
-### Maintenance Flow
+## 🔍 How It Works
 
 ```text
 Timer Start
@@ -122,50 +110,30 @@ maintenance.sh
    ↓
 Lock Check
    ↓
-Detect Raspberry Pi / PC
-   ↓
-Read Current State
+State Detection
    ↓
 OverlayFS Mode Check
    ↓
-Choose Action
-   ↓
 Reboot if Needed
    ↓
-Run Maintenance Tasks
+Run Tasks (apt, custom scripts)
    ↓
-Restore OverlayFS ON
+Restore OverlayFS (read-only)
+   ↓
+Wait for next scheduled run
 ```
 
 ---
 
-## 🎯 Actions
-
-| Action | Description |
-|-------|-------------|
-| `NEED_OVERLAY_OFF` | Reboot into Overlay OFF mode |
-| `DO_MAINTENANCE` | Execute maintenance tasks |
-| `MAINTENANCE_CONTINUE` | Resume interrupted maintenance |
-| `RESUME_TO_OVERLAY_OFF` | Recover previous interrupted state |
-| `COOL_DOWN` | Skip run during cooldown period |
-| `IDLE` | Initial / neutral state |
-
----
-
-## 🧪 Dry Run Mode
-
-Test safely without reboot or Overlay changes:
+## 🧪 Safe Testing (Dry Run)
 
 ```bash
 sudo maintenance.sh --dry
 ```
 
-Dry-run behavior:
-
-- No reboot
-- No Overlay switch
-- Logs only
-- State file updates
+* No reboot
+* No OverlayFS changes
+* Logs only
 
 ---
 
@@ -187,134 +155,75 @@ tasks:
   - name: custom_script
     cmd: bash /usr/local/bin/myscript.sh
 ```
-**apt_update.sh ; Smart Raspberry Pi Boot Partition Handling**
-
-During kernel / firmware upgrades, this project temporarily remounts `/boot/firmware` as read-write and restores read-only mode automatically.
 
 ---
 
-## ⏱ systemd Timer Example
+## 🔄 State Transitions (Simplified)
 
-```ini
-[Timer]
-OnCalendar=Sun,Thu *-*-* 04:00:00
-RandomizedDelaySec=300
-Persistent=true
-```
-
-Enable:
-
-```bash
-sudo systemctl daemon-reload
-sudo systemctl enable --now auto-maintenance.timer
-```
-
-Check:
-
-```bash
-systemctl list-timers
-```
+| Overlay | State | Action                       |
+| ------- | ----- | ---------------------------- |
+| ON      | 2     | NEED_OVERLAY_OFF / COOL_DOWN |
+| ON      | 1     | RESUME_TO_OVERLAY_OFF        |
+| ON      | 0     | NEED_OVERLAY_OFF (initial)   |
+| OFF     | 2     | DO_MAINTENANCE / COOL_DOWN   |
+| OFF     | 1     | MAINTENANCE_CONTINUE         |
+| OFF     | 0     | IDLE                         |
 
 ---
 
-## 🧩 Cooldown Control
+## 💡 State File Handling
 
-Default value is defined in: `/usr/local/lib/auto-maintenance/constants/constants.sh`
+The system relies on a persistent state file.
 
-```bash
-COOLDOWN=86400
-```
-
-(24 hours)
-
-This prevents excessive SD card writes and repeated maintenance runs.
+* Missing or corrupted state will reset to a safe default (`STATE=0`)
+* Maintenance will restart automatically from a clean state
+* Designed to recover from interruptions without manual intervention
 
 ---
 
 ## 📄 Logs
 
-### Main Log
-
 ```bash
-cat /var/log/maintenance/maintenance.log
-```
-
-### Task JSON Result
-
-```bash
-cat /var/log/maintenance/task_status.json
-```
-
-Example:
-
-```json
-{"task":"apt_upgrade","result":"success","time":"2026-05-03"}
+/var/log/maintenance/maintenance.log
+/var/log/maintenance/task_status.json
 ```
 
 ---
 
-## 🔐 Duplicate Run Protection
+## 🔐 Security Notice
 
-If another process is already running:
+Official releases are **only published in this repository**.
 
-```text
-[warn] Another maintenance.sh already running → exit
-```
+We do NOT distribute:
 
----
+* ZIP archives
+* EXE files
+* Third-party mirrors
 
-## 🧯 Troubleshooting
-
-| Problem | Cause | Fix |
-|--------|------|-----|
-| Infinite reboot loop | Broken state file | Remove state file |
-| No maintenance run | Cooldown active | Wait or reduce cooldown |
-| Stuck in resume mode | Overlay toggle failed | Manually set OFF then reboot |
+If you find this project elsewhere, treat it as untrusted.
 
 ---
 
-## ✅ Tested Environments
+## 🧩 Tested Environments
 
-- Raspberry Pi 2 Model B
-- Raspberry Pi Zero
-- Raspberry Pi 3 Model B+
-- Raspberry Pi 3 Model B (QEMU)
-- Raspberry Pi OS
-- Raspbian Trixie
-- Debian Bullseye
-- VirtualBox test environment
+* Raspberry Pi 2 / 3 / Zero
+* Raspberry Pi OS / Debian
+* QEMU / VirtualBox
 
-> 数ヶ月の実運用実績あり。
-
----
-
-## 🚦 CI
-
-GitHub Actions:
-
-- shellcheck
-- bash syntax check (`bash -n`)
+✔ Real-world tested for months
 
 ---
 
 ## 🛣 Roadmap
 
-- Retry logic for Overlay switching
-- Auto recovery from FAILED state
-- Release package builds
-- Web dashboard (future)
+* Retry logic for Overlay switching
+* Automatic recovery from failed states
 
 ---
 
-## 🤝 Contributions
+## 🤝 Contributing
 
-Issues / Pull Requests welcome.
-
----
-
-## ✅ Status
-
-beta1 release for establish Stable release for general use.
+Issues and Pull Requests are welcome.
 
 ---
 
@@ -324,11 +233,21 @@ MIT License
 
 ---
 
-## 🏛️ Official Repository
+## 🏁 Status
 
-**This is the original actively maintained repository with tested installation steps.**
-### **If this project helps you, please star this repository.**
-**Reliable updates for read-only Raspberry Pi systems.**
+**v2.0.0-beta1 — Stable beta for real-world usage**
+
+<<<<<<< HEAD
 
 
+=======
+---
 
+## 🏛 Official Repository
+
+**This is the original upstream repository.**
+
+Actively used in real-world deployments and maintained as needed.
+
+Reliable updates for read-only Raspberry Pi systems.
+>>>>>>> ec8fa8e (2026-5-6 8:58 README sanitaize state)

@@ -92,7 +92,6 @@ export OVERLAY_ON=1     # 現在 overlay=ON
 export OVERLAY_OFF=0    # 現在 overlay=OFF
 
 # Operation states
-export STATE_FAILED=-1
 export STATE_NONE=0
 export STATE_IN_PROGRESS=1
 export STATE_DONE=2
@@ -116,9 +115,10 @@ fi
 #BRANCH="main"
 #BRANCH="v2.0.0-rc"
 BRANCH="v2.0.0-beta1"
+#BRANCH="v2.0.0-DEV"
 
 TEST_BRANCH=(
-    v2.0.0-beta1
+    v2.0.0-DEV
 )
 
 is_test_branch() {
