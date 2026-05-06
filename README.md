@@ -237,10 +237,6 @@ MIT License
 
 **v2.0.0-beta1 — Stable beta for real-world usage**
 
-<<<<<<< HEAD
-
-
-=======
 ---
 
 ## 🏛 Official Repository
@@ -250,4 +246,3 @@ MIT License
 Actively used in real-world deployments and maintained as needed.
 
 Reliable updates for read-only Raspberry Pi systems.
->>>>>>> ec8fa8e (2026-5-6 8:58 README sanitaize state)
