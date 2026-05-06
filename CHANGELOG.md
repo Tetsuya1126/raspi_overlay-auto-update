@@ -18,7 +18,7 @@ All notable changes to this project will be documented in this file.
 * Improved reboot / OverlayFS switching flow
 * Better Raspberry Pi boot partition handling during upgrades
 * Add PC mode
-* Eliminate LED functions
+* Eliminate LED status
 
 ### Improved
 
