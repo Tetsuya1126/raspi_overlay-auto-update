@@ -221,6 +221,13 @@ If you find this project elsewhere, treat it as untrusted.
 
 ---
 
+## 📚 Documentation
+
+See Wiki for detailed usage (Keep on update):
+https://github.com/Tetsuya1126/raspi_overlay-auto-update/wiki
+
+---
+
 ## 🤝 Contributing
 
 Issues and Pull Requests are welcome.
@@ -246,3 +253,7 @@ MIT License
 Actively used in real-world deployments and maintained as needed.
 
 Reliable updates for read-only Raspberry Pi systems.
+
+---
+
+Keywords: Raspberry Pi OverlayFS auto update safe upgrade systemd.

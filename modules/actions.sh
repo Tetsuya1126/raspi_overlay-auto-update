@@ -25,7 +25,7 @@ action_raspi_only() {
       done_after_maintenance
       ;;
     IDLE)
-      log_info "Run maintenance tasks. $ACTION"
+      log_info "Initial state detected. Running first maintenance. $ACTION"
       run_maintenance
       done_after_maintenance
       ;;
@@ -45,8 +45,12 @@ action_pc_only() {
   #export DRY=true
 
   case "$ACTION" in
-    DO_MAINTENANCE | MAINTENANCE_CONTINUE | IDLE)
+    DO_MAINTENANCE | MAINTENANCE_CONTINUE)
       log_info "Run maintenance tasks. $ACTION"
+      run_maintenance
+      ;;
+    IDLE)
+      log_info "Initial state detected. Running first maintenance. $ACTION"
       run_maintenance
       ;;
     NEED_OVERLAY_OFF | RESUME_TO_OVERLAY_OFF)

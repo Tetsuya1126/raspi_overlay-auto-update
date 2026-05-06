@@ -4,13 +4,13 @@
 
 overlay_on() {
   echo "[INFO] Turning overlay ON"
-  sudo "$OVERLAY_CMD" "$OVERLAY_SUBCMD" "$OVERLAY_OP" "$OVERLAY_TURN_ON" || return 1
+  "$OVERLAY_CMD" "$OVERLAY_SUBCMD" "$OVERLAY_OP" "$OVERLAY_TURN_ON" || return 1
   systemctl daemon-reload || return 1
 }
 
 overlay_off() {
   echo "[INFO] Turning overlay OFF"
-  sudo "$OVERLAY_CMD" "$OVERLAY_SUBCMD" "$OVERLAY_OP" "$OVERLAY_TURN_OFF" || return 1
+  "$OVERLAY_CMD" "$OVERLAY_SUBCMD" "$OVERLAY_OP" "$OVERLAY_TURN_OFF" || return 1
   systemctl daemon-reload || return 1
 }
 

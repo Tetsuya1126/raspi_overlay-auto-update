@@ -49,18 +49,23 @@ state_set() {
 }
 
 # --------------------------------------------
-# return 0 = cooldown elapsed (実行可能)
-# return 1 = still cooling down (まだ実行不可)
+# return 0 = still cooling down (まだ実行不可)
+# return 1 = cooldown elapsed (実行可能)
 # --------------------------------------------
-state_is_cooldown_elapsed() {
+is_cooldown_state() {
   local done_at="$1"
 
   # done_at が無い or 0 の場合は即 elapsed 判定
   if [[ -z "$done_at" || "$done_at" -le 0 ]]; then
-    return 0
+    return 1
   fi
 
-  [ -n "$done_at" ] && [ $(( $(date +%s) - done_at )) -lt "$COOLDOWN" ]
+  # クールダウン中ならアクティブ（return 0）
+  if [ $(( $(date +%s) - done_at )) -lt "$COOLDOWN" ]; then
+    return 0
+  else
+    return 1
+  fi
 }
 
 # ---- Decide action ----
@@ -89,7 +94,7 @@ state_decide_action() {
     # shellcheck disable=SC2153
     case "$state" in
       "$STATE_DONE")
-        if state_is_cooldown_elapsed "$done_at"; then
+        if is_cooldown_state "$done_at"; then
           echo "COOL_DOWN"
         else
           echo "NEED_OVERLAY_OFF"
@@ -109,7 +114,7 @@ state_decide_action() {
   else
     case "$state" in
       "$STATE_DONE")
-        if state_is_cooldown_elapsed "$done_at"; then
+        if is_cooldown_state "$done_at"; then
           echo "COOL_DOWN"
         else
           echo "DO_MAINTENANCE"
