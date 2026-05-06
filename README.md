@@ -82,7 +82,7 @@ Install and enable automatic maintenance in one step:
 ### One-line install
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/Tetsuya1126/raspi_overlay-auto-update/v2.0.0-beta1/install/install.sh | sudo bash
+curl -fsSL https://raw.githubusercontent.com/Tetsuya1126/raspi_overlay-auto-update/v2.0.0-rc/install/install.sh | sudo bash
 ```
 
 ---
@@ -90,7 +90,7 @@ curl -fsSL https://raw.githubusercontent.com/Tetsuya1126/raspi_overlay-auto-upda
 ### Or manual install
 
 ```bash
-git clone --branch v2.0.0-beta1 --depth 1 https://github.com/Tetsuya1126/raspi_overlay-auto-update.git
+git clone --branch v2.0.0-rc --depth 1 https://github.com/Tetsuya1126/raspi_overlay-auto-update.git
 cd raspi_overlay-auto-update
 sudo ./install/install.sh
 ```
@@ -235,7 +235,7 @@ MIT License
 
 ## 🏁 Status
 
-**v2.0.0-beta1 — Stable beta for real-world usage**
+**v2.0.0-rc — Release candidate for real-world usage**
 
 ---
 
