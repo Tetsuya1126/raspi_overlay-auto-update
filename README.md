@@ -14,25 +14,6 @@ OverlayFS 環境に対応した **安全な自動 apt 更新スクリプト**。
 
 ---
 
-## Preview Release Available
-
-The next-generation version is now available for testing.
-
-Branch:
-`v2.0.0-beta1`
-
-Status:
-- Beta test release
-- Stable users should remain on `main`
-
-If no critical issues are found, this version may become the next stable release.
-
----
-## ⚠️ Official releases are published only in this repository.
-
-Any third-party archives or mirrored packages are unverified and unsupported.
-
----
 ## Features
 - OverlayFS 書き込み保護を維持したまま OS 更新
 - 2 Stage update & reboot flow
@@ -157,4 +138,35 @@ WatchdogDevice=/dev/watchdog0
 
 ---
 
+## 🚧 Next Generation (v2)
+
+This README describes the stable v1 implementation.
+
+A major redesign is currently in progress.
+
+The upcoming v2 introduces:
+
+- Reboot-based safe update architecture
+- State-driven recovery system
+- Improved long-term stability for unattended systems
+
+👉 Available now as release candidate:
+https://github.com/Tetsuya1126/raspi_overlay-auto-update/tree/v2.0.0-rc
+
+⚠️ v2 is under development. For stable environments, continue using v1.0.0.
+
+---
+
+## ⚠️ Official releases are published only in this repository.
+
+Any third-party archives or mirrored packages are unverified and unsupported.
+
+---
+
 Keywords: Raspberry Pi OverlayFS auto update safe upgrade systemd watchdog.
+
+
+
+
+
+---
