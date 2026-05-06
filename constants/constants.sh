@@ -113,8 +113,8 @@ fi
 # Branch
 # =================================================
 #BRANCH="main"
-#BRANCH="v2.0.0-rc"
-BRANCH="v2.0.0-beta1"
+BRANCH="v2.0.0-rc"
+#BRANCH="v2.0.0-beta1"
 #BRANCH="v2.0.0-DEV"
 
 TEST_BRANCH=(
