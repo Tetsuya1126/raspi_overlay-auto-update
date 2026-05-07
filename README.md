@@ -82,7 +82,7 @@ Install and enable automatic maintenance in one step:
 ### One-line install
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/Tetsuya1126/raspi_overlay-auto-update/v2.0.0-rc/install/install.sh | sudo bash
+curl -fsSL https://raw.githubusercontent.com/Tetsuya1126/raspi_overlay-auto-update/v2.0.0-rc/install/install_curl.sh | sudo bash
 ```
 
 ---
