@@ -9,7 +9,7 @@ TMP_DIR="$(mktemp -d)"
 cleanup() {
     rm -rf "$TMP_DIR"
 }
-trap cleanup EXIT
+trap cleanup EXIT INT TERM
 
 echo "🚀 Downloading installer..."
 
