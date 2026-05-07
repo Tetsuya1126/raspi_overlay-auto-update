@@ -18,4 +18,4 @@ git clone --depth=1 --branch "$BRANCH" \
 
 cd "$TMP_DIR/repo/install"
 
-sudo bash ./install.sh
+bash ./install.sh
