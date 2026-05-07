@@ -80,7 +80,7 @@ done
 # Copy default maintenance tasks configuration if it doesn't exist
 if [[ -f "$AUTO_MAINTENANCE_TASKS_FILE" ]]; then
   echo "[INFO] Existing config found"
-  read -rp "Overwrite? [yes/No]: " ans　</dev/tty || true
+  read -rp "Overwrite? [yes/No]: " ans </dev/tty || true
   if [[ "$ans" == "yes" ]]; then
     echo  "[INFO] Overwriting existing config with default config"
   else
