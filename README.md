@@ -82,7 +82,7 @@ Install and enable automatic maintenance in one step:
 ### One-line install
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/Tetsuya1126/raspi_overlay-auto-update/v2.0.0-rc/install/install_curl.sh | sudo bash
+curl -fsSL https://raw.githubusercontent.com/Tetsuya1126/raspi_overlay-auto-update/v2.0.0-rc/install/curl_installer.sh | sudo bash
 ```
 
 ---
@@ -128,7 +128,8 @@ Wait for next scheduled run
 ## 🧪 Safe Testing (Dry Run)
 
 ```bash
-sudo maintenance.sh --dry
+cd /usr/local/bin/auto-maintenance/
+sudo ./maintenance.sh --dry
 ```
 
 * No reboot
